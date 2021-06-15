@@ -1,11 +1,14 @@
 import React from 'react';
 
-function UserInfo() {
+function UserInfo(props) {
 	return (
-		<div className="main-container">
-			<div className="container">
-				<h1>User</h1>
-			</div>
+		<div>
+			<ul>
+				{props.firstName} {props.lastName}
+			</ul>
+			<ul>{props.email}</ul>
+			<ul>{props.phone}</ul>
+			<br />
 		</div>
 	);
 }
