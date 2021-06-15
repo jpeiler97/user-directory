@@ -1,0 +1,42 @@
+[
+	{
+		"results": [
+			{
+				"name": {
+					"title": "mr",
+					"first": "chris",
+					"last": "fields"
+				},
+				"email": "chris.fields@example.com",
+				"phone": "387-960-6104"
+			},
+			{
+				"name": {
+					"title": "mrs",
+					"first": "teresa",
+					"last": "alexander"
+				},
+				"email": "teresa.alexander@example.com",
+				"phone": "292-271-7203"
+			},
+			{
+				"name": {
+					"title": "mr",
+					"first": "brian",
+					"last": "prescott"
+				},
+				"email": "brian.prescott@example.com",
+				"phone": "413-475-7376"
+			},
+			{
+				"name": {
+					"title": "ms",
+					"first": "genesis",
+					"last": "jennings"
+				},
+				"email": "genesis.jennings@example.com",
+				"phone": "063-483-5089"
+			}
+		]
+	}
+]
