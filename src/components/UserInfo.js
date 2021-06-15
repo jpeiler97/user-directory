@@ -1,13 +1,13 @@
 import React from 'react';
 
-function Foo() {
+function UserInfo() {
 	return (
 		<div className="main-container">
 			<div className="container">
-				<h1>Foo!</h1>
+				<h1>User</h1>
 			</div>
 		</div>
 	);
 }
 
-export default Foo;
+export default UserInfo;

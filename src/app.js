@@ -1,8 +1,8 @@
 import React from 'react';
-import Foo from './components/Foo.js';
+import UserInfo from './components/UserInfo.js';
 
 function App() {
-	return <Foo />;
+	return <UserInfo />;
 }
 
 export default App;
