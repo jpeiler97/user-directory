@@ -1,15 +1,18 @@
 import React from 'react';
+import '../styles/UserInfo.css';
 
-function UserInfo({ firstName, lastName, email, phone }) {
+function UserInfo({ id, firstName, lastName, email, phone }) {
 	return (
-		<div>
-			<ul>
-				{firstName} {lastName}
-			</ul>
-			<ul>{email}</ul>
-			<ul>{phone}</ul>
-			<br />
-		</div>
+		<thead>
+			<tr>
+				<th scope="row">{id}</th>
+				<td>
+					{firstName} {lastName}
+				</td>
+				<td>{email}</td>
+				<td>{phone}</td>
+			</tr>
+		</thead>
 	);
 }
 
