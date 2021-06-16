@@ -6,10 +6,31 @@ import Sort from './Sort';
 class UserTable extends Component {
 	state = {
 		order: 'descending',
-		category: 'id',
+		category: 'phone',
 		userList: users[0].results
 	};
 
+	componentDidMount() {
+		const userList = users[0].results.sort((a, b) => {
+			//Sorting based on category choice
+			switch (this.state.category) {
+				case 'id':
+					return a.id.localeCompare(b.id);
+				case 'firstName':
+					return a.name.first.localeCompare(b.name.first);
+				case 'lastName':
+					return a.name.last.localeCompare(b.name.last);
+				case 'phone':
+					return a.phone.localeCompare(b.phone);
+				case 'email':
+					return a.email.localeCompare(b.email);
+				default: {
+					return a.id.localeCompare(b.id);
+				}
+			}
+		});
+		this.setState({ userList: userList });
+	}
 	setAscending = () => {
 		this.setState({ order: 'ascending' });
 	};
