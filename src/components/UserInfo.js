@@ -1,13 +1,13 @@
 import React from 'react';
 
-function UserInfo(props) {
+function UserInfo({ firstName, lastName, email, phone }) {
 	return (
 		<div>
 			<ul>
-				{props.firstName} {props.lastName}
+				{firstName} {lastName}
 			</ul>
-			<ul>{props.email}</ul>
-			<ul>{props.phone}</ul>
+			<ul>{email}</ul>
+			<ul>{phone}</ul>
 			<br />
 		</div>
 	);
