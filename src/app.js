@@ -6,7 +6,6 @@ class App extends Component {
 		return (
 			<div className="container">
 				<UserTable />
-				<div />
 			</div>
 		);
 	}

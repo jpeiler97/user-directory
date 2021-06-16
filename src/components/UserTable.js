@@ -6,31 +6,34 @@ import Sort from './Sort';
 class UserTable extends Component {
 	state = {
 		order: 'descending',
-		category: 'phone',
+		category: 'First Name',
 		userList: users[0].results
 	};
 
-	componentDidMount() {
+	updateUserList = () => {
 		const userList = users[0].results.sort((a, b) => {
 			//Sorting based on category choice
 			switch (this.state.category) {
-				case 'id':
-					return a.id.localeCompare(b.id);
-				case 'firstName':
+				case 'First Name':
 					return a.name.first.localeCompare(b.name.first);
-				case 'lastName':
+				case 'Last Name':
 					return a.name.last.localeCompare(b.name.last);
-				case 'phone':
+				case 'Phone':
 					return a.phone.localeCompare(b.phone);
-				case 'email':
+				case 'Email':
 					return a.email.localeCompare(b.email);
 				default: {
-					return a.id.localeCompare(b.id);
+					break;
 				}
 			}
 		});
-		this.setState({ userList: userList });
-	}
+
+		this.state.order === 'descending'
+			? this.setState({ userList: userList.reverse() })
+			: this.setState({ userList: userList });
+
+		console.log(this.state.userList);
+	};
 	setAscending = () => {
 		this.setState({ order: 'ascending' });
 	};
@@ -39,9 +42,8 @@ class UserTable extends Component {
 		this.setState({ order: 'descending' });
 	};
 
-	handleOrderSubmit = (event) => {
-		event.preventDefault();
-		this.searchGiphy(this.state.order);
+	setCategory = (event) => {
+		this.setState({ category: event.target.innerText });
 	};
 
 	render() {
@@ -56,38 +58,24 @@ class UserTable extends Component {
 							<th scope="col">Phone</th>
 						</tr>
 					</thead>
-					{this.state.order === 'ascending' ? (
-						[ ...this.state.userList ]
-							.reverse()
-							.map((user) => (
-								<UserInfo
-									key={user.id}
-									id={user.id}
-									firstName={user.name.first}
-									lastName={user.name.last}
-									email={user.email}
-									phone={user.phone}
-								/>
-							))
-					) : (
-						[ ...this.state.userList ].map((user) => (
-							<UserInfo
-								key={user.id}
-								id={user.id}
-								firstName={user.name.first}
-								lastName={user.name.last}
-								email={user.email}
-								phone={user.phone}
-							/>
-						))
-					)}
+					{this.state.userList.map((user) => (
+						<UserInfo
+							key={user.id}
+							id={user.id}
+							firstName={user.name.first}
+							lastName={user.name.last}
+							email={user.email}
+							phone={user.phone}
+						/>
+					))}
 				</table>
 				<Sort
 					order={this.state.order}
 					category={this.state.category}
 					setAscending={this.setAscending}
 					setDescending={this.setDescending}
-					handleOrderSubmit={this.handleOrderSubmit}
+					setCategory={this.setCategory}
+					updateUserList={this.updateUserList}
 				/>
 			</div>
 		);

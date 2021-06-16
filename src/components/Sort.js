@@ -1,6 +1,7 @@
 import React from 'react';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
-function Sort({ order, category, setAscending, setDescending, handleOrderSubmit }) {
+function Sort({ order, category, setAscending, setDescending, setCategory, updateUserList }) {
 	return (
 		<div className="card-body">
 			<p className="card-text">
@@ -12,7 +13,31 @@ function Sort({ order, category, setAscending, setDescending, handleOrderSubmit 
 			<button className="btn btn-primary" onClick={setAscending}>
 				Ascend
 			</button>
-			<button className="btn btn-primary" onClick={handleOrderSubmit}>
+			<br />
+			<DropdownButton id="dropdown-basic-button" title="Category">
+				<li>
+					<button className="dropdown-item" type="button" onClick={setCategory}>
+						First Name
+					</button>
+				</li>
+				<li>
+					<button className="dropdown-item" type="button" onClick={setCategory}>
+						Last Name
+					</button>
+				</li>
+				<li>
+					<button className="dropdown-item" type="button" onClick={setCategory}>
+						Email
+					</button>
+				</li>
+				<li>
+					<button className="dropdown-item" type="button" onClick={setCategory}>
+						Phone
+					</button>
+				</li>
+			</DropdownButton>
+			<br />
+			<button className="btn btn-primary" onClick={updateUserList}>
 				Submit
 			</button>
 		</div>
