@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Sort extends React.Component {
+class Sort extends Component {
 	// Setting the initial state of the Counter component
 	state = {
 		sortOrder: -1,
