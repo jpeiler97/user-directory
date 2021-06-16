@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/UserInfo.css';
+import './UserInfo.css';
 
 function UserInfo({ id, firstName, lastName, email, phone }) {
 	return (

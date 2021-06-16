@@ -1,5 +1,5 @@
 import React from 'react';
-import UserInfo from './components/UserInfo.js';
+import UserInfo from './components/UserInfo';
 import users from './users.json';
 
 function App() {
