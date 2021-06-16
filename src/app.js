@@ -1,5 +1,6 @@
 import React from 'react';
 import UserInfo from './components/UserInfo';
+import Sort from './components/Sort';
 import users from './users.json';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 						/>
 					))}
 				</table>
+				<Sort />
 			</div>
 		</div>
 	);
