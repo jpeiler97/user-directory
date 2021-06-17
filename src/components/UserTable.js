@@ -6,44 +6,42 @@ import Sort from './Sort';
 class UserTable extends Component {
 	state = {
 		order: 'descending',
-		category: 'First Name',
+		category: 'name.first',
 		userList: users[0].results
 	};
 
+	sortByCategory = (category) => {
+		return function(a, b) {
+			if (a[category] > b[category]) return 1;
+			else if (a[category] < b[category]) return -1;
+
+			return 0;
+		};
+	};
+
 	updateUserList = () => {
-		const userList = users[0].results.sort((a, b) => {
-			//Sorting based on category choice
-			switch (this.state.category) {
-				case 'First Name':
-					return a.name.first.localeCompare(b.name.first);
-				case 'Last Name':
-					return a.name.last.localeCompare(b.name.last);
-				case 'Phone':
-					return a.phone.localeCompare(b.phone);
-				case 'Email':
-					return a.email.localeCompare(b.email);
-				default: {
-					break;
-				}
-			}
-		});
-
-		this.state.order === 'descending'
-			? this.setState({ userList: userList.reverse() })
-			: this.setState({ userList: userList });
-
-		console.log(this.state.userList);
+		// if (this.state.order === 'ascending') {
+		// 	console.log('ascending');
+		// 	this.setState({ userList: users[0].results.sort(this.sortByCategory(this.state.category)) });
+		// } else {
+		// 	console.log(this.state.order);
+		// 	this.setState({ userList: users[0].results.sort(this.sortByCategory(this.state.category)).reverse() });
+		// }
+		this.setState({ userList: users[0].results.sort(this.sortByCategory(this.state.category)) });
 	};
 	setAscending = () => {
 		this.setState({ order: 'ascending' });
+		console.log(this.state.order);
 	};
 
 	setDescending = () => {
 		this.setState({ order: 'descending' });
+		console.log(this.state.order);
 	};
 
 	setCategory = (event) => {
-		this.setState({ category: event.target.innerText });
+		this.setState({ category: event.target.dataset.category });
+		console.log(this.state.category);
 	};
 
 	render() {
@@ -58,20 +56,37 @@ class UserTable extends Component {
 							<th scope="col">Phone</th>
 						</tr>
 					</thead>
-					{this.state.userList.map((user) => (
-						<UserInfo
-							key={user.id}
-							id={user.id}
-							firstName={user.name.first}
-							lastName={user.name.last}
-							email={user.email}
-							phone={user.phone}
-						/>
-					))}
+					{this.state.order} {this.state.category}
+					{this.state.order === 'descending' ? (
+						this.state.userList
+							.sort(this.sortByCategory(this.state.category))
+							.map((user) => (
+								<UserInfo
+									key={user.id}
+									id={user.id}
+									firstName={user.name.first}
+									lastName={user.name.last}
+									email={user.email}
+									phone={user.phone}
+								/>
+							))
+					) : (
+						this.state.userList
+							.sort(this.sortByCategory(this.state.category))
+							.reverse()
+							.map((user) => (
+								<UserInfo
+									key={user.id}
+									id={user.id}
+									firstName={user.name.first}
+									lastName={user.name.last}
+									email={user.email}
+									phone={user.phone}
+								/>
+							))
+					)}
 				</table>
 				<Sort
-					order={this.state.order}
-					category={this.state.category}
 					setAscending={this.setAscending}
 					setDescending={this.setDescending}
 					setCategory={this.setCategory}

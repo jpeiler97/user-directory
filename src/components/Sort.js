@@ -16,22 +16,22 @@ function Sort({ order, category, setAscending, setDescending, setCategory, updat
 			<br />
 			<DropdownButton id="dropdown-basic-button" title="Category">
 				<li>
-					<button className="dropdown-item" type="button" onClick={setCategory}>
+					<button className="dropdown-item" type="button" data-category="name.first" onClick={setCategory}>
 						First Name
 					</button>
 				</li>
 				<li>
-					<button className="dropdown-item" type="button" onClick={setCategory}>
+					<button className="dropdown-item" type="button" data-category="name.last" onClick={setCategory}>
 						Last Name
 					</button>
 				</li>
 				<li>
-					<button className="dropdown-item" type="button" onClick={setCategory}>
+					<button className="dropdown-item" type="button" data-category="email" onClick={setCategory}>
 						Email
 					</button>
 				</li>
 				<li>
-					<button className="dropdown-item" type="button" onClick={setCategory}>
+					<button className="dropdown-item" type="button" data-category="phone" onClick={setCategory}>
 						Phone
 					</button>
 				</li>
