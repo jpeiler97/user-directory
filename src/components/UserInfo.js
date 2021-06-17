@@ -1,10 +1,9 @@
 import React from 'react';
 
-function UserInfo({ id, firstName, lastName, email, phone }) {
+function UserInfo({ firstName, lastName, email, phone }) {
 	return (
 		<thead>
 			<tr>
-				<th scope="row">{id}</th>
 				<td>
 					{firstName} {lastName}
 				</td>

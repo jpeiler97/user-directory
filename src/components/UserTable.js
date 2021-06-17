@@ -58,7 +58,6 @@ class UserTable extends Component {
 				<table className="table">
 					<thead>
 						<tr>
-							<th scope="col">ID</th>
 							<th scope="col">Name</th>
 							<th scope="col">Email</th>
 							<th scope="col">Phone</th>
@@ -68,8 +67,9 @@ class UserTable extends Component {
 					{this.state.order === 'descending' ? (
 						this.state.userList
 							.sort(this.sortByCategory(this.state.category))
-							.map((user) => (
+							.map((user, index) => (
 								<UserInfo
+									key={index}
 									firstName={user.name.first}
 									lastName={user.name.last}
 									email={user.email}
@@ -80,8 +80,9 @@ class UserTable extends Component {
 						this.state.userList
 							.sort(this.sortByCategory(this.state.category))
 							.reverse()
-							.map((user) => (
+							.map((user, index) => (
 								<UserInfo
+									key={index}
 									firstName={user.name.first}
 									lastName={user.name.last}
 									email={user.email}
