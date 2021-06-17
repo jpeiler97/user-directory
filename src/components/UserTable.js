@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import users from '../users.json';
 import UserInfo from './UserInfo';
 import Sort from './Sort';
+import API from '../utils/API';
 
 class UserTable extends Component {
 	state = {
@@ -9,7 +9,20 @@ class UserTable extends Component {
 		orderName: 'descending',
 		category: 'first',
 		categoryName: 'first name',
-		userList: users[0].results
+		userList: []
+	};
+
+	componentDidMount() {
+		this.getNewList(25);
+	}
+
+	getNewList = (length) => {
+		API.getResults(length)
+			.then((res) => {
+				console.log(res.data.results[0]);
+				this.setState({ userList: res.data.results });
+			})
+			.catch((err) => console.log(err));
 	};
 
 	sortByCategory = (category) => {
@@ -57,8 +70,6 @@ class UserTable extends Component {
 							.sort(this.sortByCategory(this.state.category))
 							.map((user) => (
 								<UserInfo
-									key={user.id}
-									id={user.id}
 									firstName={user.name.first}
 									lastName={user.name.last}
 									email={user.email}
@@ -71,8 +82,6 @@ class UserTable extends Component {
 							.reverse()
 							.map((user) => (
 								<UserInfo
-									key={user.id}
-									id={user.id}
 									firstName={user.name.first}
 									lastName={user.name.last}
 									email={user.email}
