@@ -12,7 +12,6 @@ class UserTable extends Component {
 
 	sortByCategory = (category) => {
 		return function(a, b) {
-			console.log(a[category]);
 			//Sorting function, compares the values for a given category and sorts them
 			//a.name[category] allows the nested keys 'first' and 'last' to be checked as well
 			if (a[category] > b[category] || a.name[category] > b.name[category]) return 1;
@@ -86,7 +85,6 @@ class UserTable extends Component {
 					setAscending={this.setAscending}
 					setDescending={this.setDescending}
 					setCategory={this.setCategory}
-					updateUserList={this.updateUserList}
 				/>
 			</div>
 		);

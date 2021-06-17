@@ -1,12 +1,9 @@
 import React from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
-function Sort({ order, category, setAscending, setDescending, setCategory, updateUserList }) {
+function Sort({ order, category, setAscending, setDescending, setCategory }) {
 	return (
 		<div className="card-body">
-			<p className="card-text">
-				Order: {order} {category}
-			</p>
 			<button className="btn btn-primary" onClick={setDescending}>
 				Descend
 			</button>
@@ -36,10 +33,6 @@ function Sort({ order, category, setAscending, setDescending, setCategory, updat
 					</button>
 				</li>
 			</DropdownButton>
-			<br />
-			<button className="btn btn-primary" onClick={updateUserList}>
-				Submit
-			</button>
 		</div>
 	);
 }
