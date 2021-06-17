@@ -6,47 +6,41 @@ import Sort from './Sort';
 class UserTable extends Component {
 	state = {
 		order: 'descending',
-		category: 'name.first',
+		category: 'first',
 		userList: users[0].results
 	};
 
 	sortByCategory = (category) => {
 		return function(a, b) {
-			if (a[category] > b[category]) return 1;
-			else if (a[category] < b[category]) return -1;
+			console.log(a[category]);
+			//Sorting function, compares the values for a given category and sorts them
+			//a.name[category] allows the nested keys 'first' and 'last' to be checked as well
+			if (a[category] > b[category] || a.name[category] > b.name[category]) return 1;
+			else if (a[category] < b[category] || a.name[category] < b.name[category]) return -1;
 
 			return 0;
 		};
 	};
 
-	updateUserList = () => {
-		// if (this.state.order === 'ascending') {
-		// 	console.log('ascending');
-		// 	this.setState({ userList: users[0].results.sort(this.sortByCategory(this.state.category)) });
-		// } else {
-		// 	console.log(this.state.order);
-		// 	this.setState({ userList: users[0].results.sort(this.sortByCategory(this.state.category)).reverse() });
-		// }
-		this.setState({ userList: users[0].results.sort(this.sortByCategory(this.state.category)) });
-	};
+	//Sets the order of the table as ascending
 	setAscending = () => {
 		this.setState({ order: 'ascending' });
-		console.log(this.state.order);
 	};
 
+	//Sets the order of the table as descending
 	setDescending = () => {
 		this.setState({ order: 'descending' });
-		console.log(this.state.order);
 	};
 
+	//Sets the category to sort the table by
 	setCategory = (event) => {
 		this.setState({ category: event.target.dataset.category });
-		console.log(this.state.category);
 	};
 
 	render() {
 		return (
 			<div className="row">
+				{/* User info table */}
 				<table className="table">
 					<thead>
 						<tr>
@@ -56,7 +50,7 @@ class UserTable extends Component {
 							<th scope="col">Phone</th>
 						</tr>
 					</thead>
-					{this.state.order} {this.state.category}
+					{/* Conditional statement that either renders the user list in ascending/descending order based on this.state.order */}
 					{this.state.order === 'descending' ? (
 						this.state.userList
 							.sort(this.sortByCategory(this.state.category))
@@ -86,6 +80,8 @@ class UserTable extends Component {
 							))
 					)}
 				</table>
+
+				{/* Buttons to choose sort options */}
 				<Sort
 					setAscending={this.setAscending}
 					setDescending={this.setDescending}
