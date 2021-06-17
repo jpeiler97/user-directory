@@ -6,7 +6,9 @@ import Sort from './Sort';
 class UserTable extends Component {
 	state = {
 		order: 'descending',
+		orderName: 'descending',
 		category: 'first',
+		categoryName: 'first name',
 		userList: users[0].results
 	};
 
@@ -22,18 +24,18 @@ class UserTable extends Component {
 	};
 
 	//Sets the order of the table as ascending
-	setAscending = () => {
-		this.setState({ order: 'ascending' });
+	setAscending = (event) => {
+		this.setState({ order: 'ascending', orderName: event.target.innerText.toLowerCase() });
 	};
 
 	//Sets the order of the table as descending
-	setDescending = () => {
-		this.setState({ order: 'descending' });
+	setDescending = (event) => {
+		this.setState({ order: 'descending', orderName: event.target.innerText.toLowerCase() });
 	};
 
 	//Sets the category to sort the table by
 	setCategory = (event) => {
-		this.setState({ category: event.target.dataset.category });
+		this.setState({ category: event.target.dataset.category, categoryName: event.target.innerText.toLowerCase() });
 	};
 
 	render() {
@@ -79,7 +81,10 @@ class UserTable extends Component {
 							))
 					)}
 				</table>
-
+				<br />
+				<p>
+					Sorting by {this.state.categoryName} in {this.state.orderName} order.
+				</p>
 				{/* Buttons to choose sort options */}
 				<Sort
 					setAscending={this.setAscending}

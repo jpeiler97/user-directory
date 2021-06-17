@@ -1,14 +1,14 @@
 import React from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
-function Sort({ order, category, setAscending, setDescending, setCategory }) {
+function Sort({ setAscending, setDescending, setCategory }) {
 	return (
 		<div className="card-body">
 			<button className="btn btn-primary" onClick={setDescending}>
-				Descend
+				Descending
 			</button>
 			<button className="btn btn-primary" onClick={setAscending}>
-				Ascend
+				Ascending
 			</button>
 			<br />
 			<DropdownButton id="dropdown-basic-button" title="Category">
