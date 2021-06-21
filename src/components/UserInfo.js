@@ -1,6 +1,6 @@
 import React from 'react';
 
-function UserInfo({ firstName, lastName, email, phone }) {
+function UserInfo({ firstName, lastName, email, phone, id }) {
 	return (
 		<thead>
 			<tr>
