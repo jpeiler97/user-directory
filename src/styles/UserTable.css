@@ -1,0 +1,15 @@
+.table {
+	background-color: #e0e0e0;
+	border-radius: 10px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#sort-info {
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+td img {
+	border-radius: 5px;
+}

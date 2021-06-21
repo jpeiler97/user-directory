@@ -1,0 +1,25 @@
+.sort-area {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.order-buttons {
+	display: flex;
+	width: 20%;
+	justify-content: center;
+}
+
+.order-choices button {
+	margin-right: 10px;
+}
+.filter-buttons {
+	display: flex;
+	justify-content: center;
+	width: 20%;
+}
+
+.filter-buttons form input,
+.filter-buttons form button {
+	margin-right: 10px;
+}

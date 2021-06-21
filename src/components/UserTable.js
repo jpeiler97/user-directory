@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import { Row } from 'react-bootstrap';
 import UserInfo from './UserInfo';
 import Sort from './Sort';
 import API from '../utils/API';
+import '../styles/UserTable.css';
+import '../styles/Sort.css';
 
 class UserTable extends Component {
 	state = {
 		order: 'descending',
-		orderName: 'descending',
+		orderName: '↓ descending',
 		category: 'first',
-		categoryName: 'first name',
+		categoryName: '👥 first name',
 		query: '',
 		userList: [],
 		//saves userList for unfiltering (only necessary because the assignment uses an API call instead of pulling from a database)
@@ -69,19 +72,17 @@ class UserTable extends Component {
 	//Filters user list by given query (first and last name)
 	filterList = (event) => {
 		event.preventDefault();
-		if (Object.keys(this.state.savedList).length > 0) {
-			console.log('longer than 0');
-			console.log(this.state.savedList);
-			this.setState({ userList: this.state.savedList }, () => {
-				const users = this.state.userList.filter((user) => {
-					//defining currentUser so it can be used with array.prototype.includes()
-					//which checks if the string includes the user's query
-					let currentUser = user.name.first.toLowerCase() + ' ' + user.name.last.toLowerCase();
-					return currentUser.includes(this.state.query.toLowerCase());
-				});
-				this.setState({ userList: users });
+		//sets userList state to savedList before filtering, so that a new filter will filter the original list instead
+		//of the list that has already been filtered
+		this.setState({ userList: this.state.savedList }, () => {
+			const users = this.state.userList.filter((user) => {
+				//defining currentUser so it can be used with array.prototype.includes()
+				//which checks if the string includes the user's query
+				let currentUser = user.name.first.toLowerCase() + ' ' + user.name.last.toLowerCase();
+				return currentUser.includes(this.state.query.toLowerCase());
 			});
-		}
+			this.setState({ userList: users });
+		});
 	};
 
 	//sets userList to savedList, since userList is overwritten when the user submits a filter
@@ -91,10 +92,7 @@ class UserTable extends Component {
 	};
 	render() {
 		return (
-			<div className="row">
-				<p>
-					Sorting by {this.state.categoryName} in {this.state.orderName} order.
-				</p>
+			<Row>
 				{/* Buttons to choose sort options */}
 				<Sort
 					setAscending={this.setAscending}
@@ -105,9 +103,11 @@ class UserTable extends Component {
 					handleInputChange={this.handleInputChange}
 					unfilterList={this.unfilterList}
 				/>
-				<br />
+				<p id="sort-info">
+					Sorting by {this.state.categoryName} in {this.state.orderName} order. || Filtering name by query: "{this.state.query}"
+				</p>
 				{/* User info table */}
-				<table className="table">
+				<table className="table user-table">
 					<thead>
 						<tr>
 							<th scope="col">Name</th>
@@ -116,37 +116,39 @@ class UserTable extends Component {
 							<th scope="col">Phone</th>
 						</tr>
 					</thead>
-					{/* Conditional statement that either renders the user list in ascending/descending order based on this.state.order */}
-					{this.state.order === 'descending' ? (
-						this.state.userList
-							.sort(this.sortByCategory(this.state.category))
-							.map((user) => (
-								<UserInfo
-									key={user.email}
-									firstName={user.name.first}
-									lastName={user.name.last}
-									email={user.email}
-									phone={user.phone}
-									image={user.picture.thumbnail}
-								/>
-							))
-					) : (
-						this.state.userList
-							.sort(this.sortByCategory(this.state.category))
-							.reverse()
-							.map((user) => (
-								<UserInfo
-									key={user.email}
-									firstName={user.name.first}
-									lastName={user.name.last}
-									email={user.email}
-									phone={user.phone}
-									image={user.picture.thumbnail}
-								/>
-							))
-					)}
+					<thead>
+						{/* Conditional statement that either renders the user list in ascending/descending order based on this.state.order */}
+						{this.state.order === 'descending' ? (
+							this.state.userList
+								.sort(this.sortByCategory(this.state.category))
+								.map((user) => (
+									<UserInfo
+										key={user.email}
+										firstName={user.name.first}
+										lastName={user.name.last}
+										email={user.email}
+										phone={user.phone}
+										image={user.picture.thumbnail}
+									/>
+								))
+						) : (
+							this.state.userList
+								.sort(this.sortByCategory(this.state.category))
+								.reverse()
+								.map((user) => (
+									<UserInfo
+										key={user.email}
+										firstName={user.name.first}
+										lastName={user.name.last}
+										email={user.email}
+										phone={user.phone}
+										image={user.picture.thumbnail}
+									/>
+								))
+						)}
+					</thead>
 				</table>
-			</div>
+			</Row>
 		);
 	}
 }
