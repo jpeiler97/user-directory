@@ -10,7 +10,8 @@ class UserTable extends Component {
 		category: 'first',
 		categoryName: 'first name',
 		query: '',
-		userList: []
+		userList: [],
+		savedList: []
 	};
 
 	handleInputChange = (event) => {
@@ -29,7 +30,7 @@ class UserTable extends Component {
 		API.getResults(length)
 			.then((res) => {
 				console.log(res.data.results[0]);
-				this.setState({ userList: res.data.results });
+				this.setState({ userList: res.data.results, savedList: res.data.results });
 			})
 			.catch((err) => console.log(err));
 	};
@@ -67,6 +68,11 @@ class UserTable extends Component {
 		const users = this.state.userList.filter((user) => user.name.first === this.state.query);
 		this.setState({ userList: users });
 	};
+
+	unfilterList = (event) => {
+		event.preventDefault();
+		this.setState({ userList: this.state.savedList });
+	};
 	render() {
 		return (
 			<div className="row">
@@ -81,6 +87,7 @@ class UserTable extends Component {
 					query={this.query}
 					filterList={this.filterList}
 					handleInputChange={this.handleInputChange}
+					unfilterList={this.unfilterList}
 				/>
 				<br />
 				{/* User info table */}
