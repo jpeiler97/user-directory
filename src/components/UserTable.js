@@ -25,6 +25,7 @@ class UserTable extends Component {
 		this.setState({
 			[name]: value
 		});
+		this.filterList(event);
 	};
 
 	//Gets new user list on component mount
@@ -88,7 +89,7 @@ class UserTable extends Component {
 	//sets userList to savedList, since userList is overwritten when the user submits a filter
 	unfilterList = (event) => {
 		event.preventDefault();
-		this.setState({ userList: this.state.savedList });
+		this.setState({ userList: this.state.savedList, query: '' });
 	};
 	render() {
 		return (
@@ -98,7 +99,7 @@ class UserTable extends Component {
 					setAscending={this.setAscending}
 					setDescending={this.setDescending}
 					setCategory={this.setCategory}
-					query={this.query}
+					query={this.state.query}
 					filterList={this.filterList}
 					handleInputChange={this.handleInputChange}
 					unfilterList={this.unfilterList}
