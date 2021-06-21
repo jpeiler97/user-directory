@@ -66,15 +66,15 @@ class UserTable extends Component {
 		this.setState({ category: event.target.dataset.category, categoryName: event.target.innerText.toLowerCase() });
 	};
 
-	//Filters user list by given query
+	//Filters user list by given query (first and last name)
 	filterList = (event) => {
 		event.preventDefault();
 		console.log(this.state.query);
 		const users = this.state.userList.filter((user) => {
 			//defining currentUser so it can be used with array.prototype.includes()
 			//which checks if the string includes the user's query
-			let currentUser = user.name.first;
-			return currentUser.includes(this.state.query);
+			let currentUser = user.name.first.toLowerCase() + ' ' + user.name.last.toLowerCase();
+			return currentUser.includes(this.state.query.toLowerCase());
 		});
 		this.setState({ userList: users });
 	};
