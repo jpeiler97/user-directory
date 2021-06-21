@@ -9,7 +9,16 @@ class UserTable extends Component {
 		orderName: 'descending',
 		category: 'first',
 		categoryName: 'first name',
+		query: '',
 		userList: []
+	};
+
+	handleInputChange = (event) => {
+		const name = event.target.name;
+		const value = event.target.value;
+		this.setState({
+			[name]: value
+		});
 	};
 
 	componentDidMount() {
@@ -36,32 +45,6 @@ class UserTable extends Component {
 		};
 	};
 
-	// setUserList = () => {
-	// 	this.state.order === 'descending'
-	// 		? this.state.userList
-	// 				.sort(this.sortByCategory(this.state.category))
-	// 				.map((user, index) => (
-	// 					<UserInfo
-	// 						key={index}
-	// 						firstName={user.name.first}
-	// 						lastName={user.name.last}
-	// 						email={user.email}
-	// 						phone={user.phone}
-	// 					/>
-	// 				))
-	// 		: this.state.userList
-	// 				.sort(this.sortByCategory(this.state.category))
-	// 				.reverse()
-	// 				.map((user, index) => (
-	// 					<UserInfo
-	// 						key={index}
-	// 						firstName={user.name.first}
-	// 						lastName={user.name.last}
-	// 						email={user.email}
-	// 						phone={user.phone}
-	// 					/>
-	// 				));
-	// };
 	//Sets the order of the table as ascending
 	setAscending = (event) => {
 		this.setState({ order: 'ascending', orderName: event.target.innerText.toLowerCase() });
@@ -79,8 +62,9 @@ class UserTable extends Component {
 	};
 
 	filterList = (event) => {
-		const query = event.target.value.trim();
-		const users = this.state.userList.filter((user) => user.category === this.state.userList);
+		event.preventDefault();
+		console.log(this.state.query);
+		const users = this.state.userList.filter((user) => user.name.first === this.state.query);
 		this.setState({ userList: users });
 	};
 	render() {
@@ -94,6 +78,9 @@ class UserTable extends Component {
 					setAscending={this.setAscending}
 					setDescending={this.setDescending}
 					setCategory={this.setCategory}
+					query={this.query}
+					filterList={this.filterList}
+					handleInputChange={this.handleInputChange}
 				/>
 				<br />
 				{/* User info table */}

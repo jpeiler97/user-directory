@@ -1,7 +1,7 @@
 import React from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
-function Sort({ setAscending, setDescending, setCategory }) {
+function Sort({ setAscending, setDescending, setCategory, query, filterList, handleInputChange }) {
 	return (
 		<div className="card-body">
 			<button className="btn btn-primary" onClick={setDescending}>
@@ -33,6 +33,17 @@ function Sort({ setAscending, setDescending, setCategory }) {
 					</button>
 				</li>
 			</DropdownButton>
+
+			<form className="form">
+				<input
+					value={query}
+					name="query"
+					type="text"
+					onChange={handleInputChange}
+					placeholder="Enter a First Name"
+				/>
+				<button onClick={filterList}>Submit Query</button>
+			</form>
 		</div>
 	);
 }
