@@ -12,7 +12,7 @@ class UserTable extends Component {
 		query: '',
 		userList: [],
 		//saves userList for unfiltering (only necessary because the assignment uses an API call instead of pulling from a database)
-		savedList: []
+		savedList: this.userList
 	};
 
 	//Sets state of query input as user types
@@ -69,14 +69,19 @@ class UserTable extends Component {
 	//Filters user list by given query (first and last name)
 	filterList = (event) => {
 		event.preventDefault();
-		console.log(this.state.query);
-		const users = this.state.userList.filter((user) => {
-			//defining currentUser so it can be used with array.prototype.includes()
-			//which checks if the string includes the user's query
-			let currentUser = user.name.first.toLowerCase() + ' ' + user.name.last.toLowerCase();
-			return currentUser.includes(this.state.query.toLowerCase());
-		});
-		this.setState({ userList: users });
+		if (Object.keys(this.state.savedList).length > 0) {
+			console.log('longer than 0');
+			console.log(this.state.savedList);
+			this.setState({ userList: this.state.savedList }, () => {
+				const users = this.state.userList.filter((user) => {
+					//defining currentUser so it can be used with array.prototype.includes()
+					//which checks if the string includes the user's query
+					let currentUser = user.name.first.toLowerCase() + ' ' + user.name.last.toLowerCase();
+					return currentUser.includes(this.state.query.toLowerCase());
+				});
+				this.setState({ userList: users });
+			});
+		}
 	};
 
 	//sets userList to savedList, since userList is overwritten when the user submits a filter
@@ -106,6 +111,7 @@ class UserTable extends Component {
 					<thead>
 						<tr>
 							<th scope="col">Name</th>
+							<th scope="col">Image</th>
 							<th scope="col">Email</th>
 							<th scope="col">Phone</th>
 						</tr>
@@ -121,6 +127,7 @@ class UserTable extends Component {
 									lastName={user.name.last}
 									email={user.email}
 									phone={user.phone}
+									image={user.picture.thumbnail}
 								/>
 							))
 					) : (
@@ -134,6 +141,7 @@ class UserTable extends Component {
 									lastName={user.name.last}
 									email={user.email}
 									phone={user.phone}
+									image={user.picture.thumbnail}
 								/>
 							))
 					)}

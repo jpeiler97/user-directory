@@ -42,7 +42,9 @@ function Sort({ setAscending, setDescending, setCategory, query, filterList, han
 					onChange={handleInputChange}
 					placeholder="Enter a First Name"
 				/>
-				<button onClick={filterList}>Submit Query</button>
+				<button className="btn btn-primary" onClick={filterList}>
+					Submit Query
+				</button>
 				<button className="btn btn-primary" type="button" onClick={unfilterList}>
 					Unfilter
 				</button>
