@@ -11,9 +11,11 @@ class UserTable extends Component {
 		categoryName: 'first name',
 		query: '',
 		userList: [],
+		//saves userList for unfiltering (only necessary because the assignment uses an API call instead of pulling from a database)
 		savedList: []
 	};
 
+	//Sets state of query input as user types
 	handleInputChange = (event) => {
 		const name = event.target.name;
 		const value = event.target.value;
@@ -22,10 +24,12 @@ class UserTable extends Component {
 		});
 	};
 
+	//Gets new user list on component mount
 	componentDidMount() {
 		this.getNewList(25);
 	}
 
+	//Gets list of users by requesting from the Random User API and sets userList/savedList state to its results
 	getNewList = (length) => {
 		API.getResults(length)
 			.then((res) => {
@@ -62,13 +66,20 @@ class UserTable extends Component {
 		this.setState({ category: event.target.dataset.category, categoryName: event.target.innerText.toLowerCase() });
 	};
 
+	//Filters user list by given query
 	filterList = (event) => {
 		event.preventDefault();
 		console.log(this.state.query);
-		const users = this.state.userList.filter((user) => user.name.first === this.state.query);
+		const users = this.state.userList.filter((user) => {
+			//defining currentUser so it can be used with array.prototype.includes()
+			//which checks if the string includes the user's query
+			let currentUser = user.name.first;
+			return currentUser.includes(this.state.query);
+		});
 		this.setState({ userList: users });
 	};
 
+	//sets userList to savedList, since userList is overwritten when the user submits a filter
 	unfilterList = (event) => {
 		event.preventDefault();
 		this.setState({ userList: this.state.savedList });
