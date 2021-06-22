@@ -4,7 +4,7 @@ import './styles/Header.css';
 class App extends Component {
 	render() {
 		return (
-			<div class="container">
+			<div className="wrapper">
 				<header>
 					<h1>User Directory</h1>
 				</header>

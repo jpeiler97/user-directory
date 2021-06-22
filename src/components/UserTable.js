@@ -8,8 +8,8 @@ import '../styles/Sort.css';
 
 class UserTable extends Component {
 	state = {
-		order: 'descending',
-		orderName: '↓ descending',
+		order: 'ascending',
+		orderName: '↑ ascending',
 		category: 'first',
 		categoryName: '👥 first name',
 		query: '',
@@ -49,7 +49,6 @@ class UserTable extends Component {
 			//a.name[category] allows the nested keys 'first' and 'last' to be checked as well
 			if (a[category] > b[category] || a.name[category] > b.name[category]) return 1;
 			else if (a[category] < b[category] || a.name[category] < b.name[category]) return -1;
-
 			return 0;
 		};
 	};
@@ -91,16 +90,16 @@ class UserTable extends Component {
 		event.preventDefault();
 		this.setState({ userList: this.state.savedList, query: '' });
 	};
+
 	render() {
 		return (
-			<Row>
+			<div className="row">
 				{/* Buttons to choose sort options */}
 				<Sort
 					setAscending={this.setAscending}
 					setDescending={this.setDescending}
 					setCategory={this.setCategory}
 					query={this.state.query}
-					filterList={this.filterList}
 					handleInputChange={this.handleInputChange}
 					unfilterList={this.unfilterList}
 				/>
@@ -119,7 +118,7 @@ class UserTable extends Component {
 					</thead>
 					<thead>
 						{/* Conditional statement that either renders the user list in ascending/descending order based on this.state.order */}
-						{this.state.order === 'descending' ? (
+						{this.state.order === 'ascending' ? (
 							this.state.userList
 								.sort(this.sortByCategory(this.state.category))
 								.map((user) => (
@@ -149,7 +148,7 @@ class UserTable extends Component {
 						)}
 					</thead>
 				</table>
-			</Row>
+			</div>
 		);
 	}
 }

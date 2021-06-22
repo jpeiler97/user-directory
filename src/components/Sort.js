@@ -1,7 +1,7 @@
 import React from 'react';
 import { DropdownButton } from 'react-bootstrap';
 
-function Sort({ setAscending, setDescending, setCategory, query, filterList, handleInputChange, unfilterList }) {
+function Sort({ setAscending, setDescending, setCategory, query, handleInputChange, unfilterList }) {
 	return (
 		<div className="sort-area">
 			<div className="card-body order-buttons">
@@ -43,7 +43,7 @@ function Sort({ setAscending, setDescending, setCategory, query, filterList, han
 						name="query"
 						type="text"
 						onChange={handleInputChange}
-						placeholder="Enter a First Name"
+						placeholder="Enter a query"
 					/>
 
 					<button className="btn btn-danger" type="button" onClick={unfilterList}>
